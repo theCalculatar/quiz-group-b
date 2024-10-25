@@ -1,6 +1,6 @@
-import { addUser, quizzes, addScore } from "./quiz.js";
+import { addUser, changeQuiz, addScore, quiz, tempUser, users } from "./quiz.js";
 
-const question = quizzes[0];
+const question = quiz;
 
 const rightSection = document.querySelector(".question");
 
@@ -28,24 +28,35 @@ addUserBtn.addEventListener("click", (e) => {
 });
 
 submitBtn.addEventListener('click', ()=>{
-    const option = document.querySelector('input')
-    console.log(option)
-    addScore(question.answer,)
-})
+    const option = document.querySelector('input[name="question"]:checked').value;
+
+    try {
+      addScore(quiz.answer,option)
+    } catch (error) {
+      console.log(error.message)
+    }
+    try {
+      changeQuiz()
+    } catch (error) {
+      gamePage.classList.add("hide");
+    }
+    displayQuestions()
+  })
 
 function displayQuestions() {
+
   rightSection.innerHTML = `
     <h3>Question 1</h3>
-    <p>${question.question}</p>`;
+    <p>${quiz.question}</p>`;
 
   const optionsElement = document.querySelector(".options");
-  question.options.forEach((option) => {
+  optionsElement.innerHTML = ''
+
+  quiz.options.forEach((option) => {
     optionsElement.innerHTML += ` <label><input type="radio" name="question" value="${option}"> ${option}</input></label><br>`;
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {});
 
-function submitQuiz() {
-  console.log("object");
-}
+

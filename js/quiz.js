@@ -10,13 +10,30 @@ const quizzes = [
     answer: "no",
     options: ["no", "yes"],
   },
+  {
+    question: "are you pregnant?",
+    answer: "wehh",
+    options: ["wehh", "yohh"],
+  },
 ];
+
+let quiz = quizzes[0]
 
 function addUser(name) {
   if (!name) {
     throw new Error("Invalid user!");
   }
   tempUser.name = name;
+}
+
+function changeQuiz() {
+  quiz = quizzes[quizzes.indexOf(quiz)+1]
+
+  if(!quiz){
+    quiz = quizzes[0]
+    addScoreToUser()
+    throw new Error("Reached end of questions!") 
+  }
 }
 
 function addScore(answer, option) {
@@ -36,8 +53,15 @@ function addScoreToUser() {
   }
   tempUser.score = score;
   tempUser.total = quizzes.length;
-  users.push(tempUser);
+  users.push({...tempUser});
+  
+  clearScore()
+}
+
+function clearScore(){
+  score = 0
+  tempUser.score = score
 }
 
 
-export { quizzes, addScore, score, users, tempUser, addScoreToUser, addUser };
+export { quizzes, addScore, score, users, tempUser, addScoreToUser, addUser, quiz, changeQuiz, clearScore };

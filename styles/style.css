@@ -52,6 +52,12 @@ body{
     align-items: center;
 }
 
+.question {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .game-section .question h3 {
     text-transform: uppercase;
     color: rgb(190, 46, 190); 

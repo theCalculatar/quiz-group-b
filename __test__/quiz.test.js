@@ -7,6 +7,8 @@ import {
   addScoreToUser,
   tempUser,
   addUser,
+  changeQuiz,
+  clearScore,
 } from "../js/quiz";
 
 describe("[Quiz list]", () => {
@@ -30,6 +32,43 @@ describe("[Quiz list]", () => {
   });
 });
 
+describe('[quiz]', () => { 
+  it('[quiz] should be defined', () => {
+    expect(quiz).toBeDefined();
+  });
+  
+  it('[quiz] should contains property { question, answer, options }', () => {
+    const { question, answer, options } = quizzes[0]; //gets first quizz
+    const hasProperties = (question && answer && options) === undefined;
+    expect(hasProperties).toBeFalsy();
+  });
+ })
+
+describe('[changeQuiz]', () => { 
+
+  it('[changeQuiz] should be defined', () => {
+    expect(changeQuiz).toBeDefined();
+  });
+
+  it('[changeQuiz] should be a function', () => {
+    expect(typeof changeQuiz).toBe('function');
+  });
+
+  it('[changeQuiz] when called should change quiz', () => {
+    const secondQuiz = quizzes[1]
+
+    changeQuiz()
+    expect(quiz).toEqual(secondQuiz);
+  });
+
+  it('[changeQuiz] when called should throw if reached end', () => {
+
+    expect(() => {
+      changeQuiz()
+    }).toThrow();
+  });
+ })
+
 describe("[User]", () => {
   it("[tempUser], should be defined", () => {
     expect(tempUser).toBeDefined();
@@ -43,6 +82,21 @@ describe("[User]", () => {
 
     expect(hasProperties).toBeTruthy();
   });
+});
+
+describe("[users]", () => {
+  test("[users] should be defined", () => {
+    expect(users).toBeDefined();
+  });
+
+  it("[users] should be a list", () => {
+    expect(Array.isArray(users)).toBeTruthy();
+  });
+
+  it("[users] should empty", () => {
+    expect(users.length).toBe(0);
+  });
+
 });
 
 describe("[addUser]", () => {
@@ -94,20 +148,23 @@ describe("[addScore]", () => {
   });
 });
 
-describe("[users]", () => {
-  test("[users] should be defined", () => {
-    expect(users).toBeDefined();
+describe('[clearScore]', () => { 
+  it('[clearScore] should be defined', () => {
+    expect(clearScore).toBeDefined();
   });
 
-  it("[users] should be a list", () => {
-    expect(Array.isArray(users)).toBeTruthy();
+  it('[clearScore] should reset score when called', () => {
+    const initialScore = 0
+    clearScore()
+    expect(score).toBe(initialScore);
+    expect(tempUser.score).toBe(initialScore);
   });
 
-  it("[users] should empty", () => {
-    expect(users.length).toBe(0);
+  it('[clearScore] should be a function', () => {
+    expect(typeof clearScore).toBe('function');
   });
+ })
 
-});
 
 describe("[addScoreToUser]", () => {
   it("[addScoreToUser] should be defined", () => {
@@ -123,8 +180,15 @@ describe("[addScoreToUser]", () => {
 
   it("[addScoreToUser] should add user to a list at the end", () => {
     addUser(tempUser.name);
+    clearScore()
     addScoreToUser();
     console.log(users)
     expect(users[0]).toEqual(tempUser);
+  });
+
+  it('[addScoreToUser] when called should clear score ', () => {
+    const initialScore = 0
+    addScoreToUser()
+    expect(score).toBe(initialScore);
   });
 });
