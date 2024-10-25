@@ -39,4 +39,5 @@ function addScoreToUser() {
   users.push(tempUser);
 }
 
+
 export { quizzes, addScore, score, users, tempUser, addScoreToUser, addUser };

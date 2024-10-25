@@ -1,5 +1,6 @@
 import {
   quizzes,
+  quiz,
   addScore,
   score,
   users,
