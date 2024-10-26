@@ -11,6 +11,7 @@ import {
   clearScore,
 } from "../js/quiz";
 
+// test predefined array for any anormalities
 describe("[Quiz list]", () => {
   it("[Quiz list] should be defined", () => {
     expect(quizzes).toBeDefined();
@@ -20,54 +21,58 @@ describe("[Quiz list]", () => {
     expect(Array.isArray(quizzes)).toBeTruthy();
   });
 
+  it("[Quiz list] object inside the list contains property { question, answer, options }", () => {
+    let sameObj = true;
+
+    quizzes.forEach((quiz_) => {
+      const { question, answer, opiton } = quiz_;
+
+      sameObj = (!question || answer || opiton) && sameObj;
+    });
+
+    expect(sameObj).toBe(true);
+  });
+
   it("[Quiz list] should contain at least one quiz", () => {
     expect(quizzes.length).toBeGreaterThan(0);
   });
 
-  it("[Quiz list] object inside the list contains property { question, answer, options }", () => {
+});
+
+describe("[quiz]", () => {
+  it("[quiz] should be defined", () => {
+    expect(quiz).toBeDefined();
+  });
+
+  it("[quiz] should contains property { question, answer, options }", () => {
     const { question, answer, options } = quizzes[0]; //gets first quizz
     const hasProperties = (question && answer && options) === undefined;
-
     expect(hasProperties).toBeFalsy();
   });
 });
 
-describe('[quiz]', () => { 
-  it('[quiz] should be defined', () => {
-    expect(quiz).toBeDefined();
-  });
-  
-  it('[quiz] should contains property { question, answer, options }', () => {
-    const { question, answer, options } = quizzes[0]; //gets first quizz
-    const hasProperties = (question && answer && options) === undefined;
-    expect(hasProperties).toBeFalsy();
-  });
- })
-
-describe('[changeQuiz]', () => { 
-
-  it('[changeQuiz] should be defined', () => {
+describe("[changeQuiz]", () => {
+  it("[changeQuiz] should be defined", () => {
     expect(changeQuiz).toBeDefined();
   });
 
-  it('[changeQuiz] should be a function', () => {
-    expect(typeof changeQuiz).toBe('function');
+  it("[changeQuiz] should be a function", () => {
+    expect(typeof changeQuiz).toBe("function");
   });
 
-  it('[changeQuiz] when called should change quiz', () => {
-    const secondQuiz = quizzes[1]
+  it("[changeQuiz] when called should change quiz", () => {
+    const secondQuiz = quizzes[1];
 
-    changeQuiz()
+    changeQuiz();
     expect(quiz).toEqual(secondQuiz);
   });
 
-  it('[changeQuiz] when called should throw if reached end', () => {
-
+  it("[changeQuiz] when called should throw if reached end", () => {
     expect(() => {
-      changeQuiz()
+      changeQuiz();
     }).toThrow();
   });
- })
+});
 
 describe("[User]", () => {
   it("[tempUser], should be defined", () => {
@@ -78,7 +83,7 @@ describe("[User]", () => {
     const { name, total } = tempUser;
     let hasProperties = name || undefined;
 
-    hasProperties = (total == 0)
+    hasProperties = total == 0;
 
     expect(hasProperties).toBeTruthy();
   });
@@ -96,7 +101,6 @@ describe("[users]", () => {
   it("[users] should empty", () => {
     expect(users.length).toBe(0);
   });
-
 });
 
 describe("[addUser]", () => {
@@ -148,23 +152,22 @@ describe("[addScore]", () => {
   });
 });
 
-describe('[clearScore]', () => { 
-  it('[clearScore] should be defined', () => {
+describe("[clearScore]", () => {
+  it("[clearScore] should be defined", () => {
     expect(clearScore).toBeDefined();
   });
 
-  it('[clearScore] should reset score when called', () => {
-    const initialScore = 0
-    clearScore()
+  it("[clearScore] should reset score when called", () => {
+    const initialScore = 0;
+    clearScore();
     expect(score).toBe(initialScore);
     expect(tempUser.score).toBe(initialScore);
   });
 
-  it('[clearScore] should be a function', () => {
-    expect(typeof clearScore).toBe('function');
+  it("[clearScore] should be a function", () => {
+    expect(typeof clearScore).toBe("function");
   });
- })
-
+});
 
 describe("[addScoreToUser]", () => {
   it("[addScoreToUser] should be defined", () => {
@@ -180,15 +183,14 @@ describe("[addScoreToUser]", () => {
 
   it("[addScoreToUser] should add user to a list at the end", () => {
     addUser(tempUser.name);
-    clearScore()
+    clearScore();
     addScoreToUser();
-    console.log(users)
     expect(users[0]).toEqual(tempUser);
   });
 
-  it('[addScoreToUser] when called should clear score ', () => {
-    const initialScore = 0
-    addScoreToUser()
+  it("[addScoreToUser] when called should clear score ", () => {
+    const initialScore = 0;
+    addScoreToUser();
     expect(score).toBe(initialScore);
   });
 });
