@@ -33,6 +33,6 @@ const quizzes = [
     options: ["AWS (Amazon Web Services)", "Apache", "MySQL"],
     answer: "AWS (Amazon Web Services)",
   },
-];
+].sort(()=> 0.5 - Math.random());
 
 export default quizzes

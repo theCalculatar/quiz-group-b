@@ -1,12 +1,6 @@
-import {
-  addUser,
-  changeQuiz,
-  addScore,
-  quiz,
-  users,
-} from "./quiz.js";
+import { addUser, changeQuiz, addScore, currentQuiz, users } from "./quiz.js";
 
-const question = quiz;
+const question = currentQuiz;
 
 const rightSection = document.querySelector(".question");
 
@@ -44,7 +38,7 @@ submitBtn.addEventListener("click", () => {
   const option = document.querySelector('input[name="question"]:checked') || "";
 
   try {
-    addScore(quiz.answer, option.value);
+    addScore(currentQuiz.answer, option.value);
   } catch (error) {
     if (error.message !== "Incorrect answer!") {
       alert(error.message);
@@ -65,12 +59,12 @@ submitBtn.addEventListener("click", () => {
 function displayQuestions() {
   rightSection.innerHTML = `
     <h3>Question 1</h3>
-    <p>${quiz.question}</p>`;
+    <p>${currentQuiz.question}</p>`;
 
   const optionsElement = document.querySelector(".options");
   optionsElement.innerHTML = "";
 
-  quiz.options.forEach((option) => {
+  currentQuiz.options.forEach((option) => {
     optionsElement.innerHTML += ` <label><input type="radio" name="question" value="${option}"> ${option}</input></label>`;
   });
 }

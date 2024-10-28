@@ -1,5 +1,5 @@
 import {
-  quiz,
+  currentQuiz,
   addScore,
   score,
   users,
@@ -37,16 +37,15 @@ describe("[Quiz list]", () => {
   it("[Quiz list] should contain at least one quiz", () => {
     expect(quizzes.length).toBeGreaterThan(0);
   });
-
 });
 
 describe("[quiz]", () => {
   it("[quiz] should be defined", () => {
-    expect(quiz).toBeDefined();
+    expect(currentQuiz).toBeDefined();
   });
 
   it("[quiz] should contains property { question, answer, options }", () => {
-    const { question, answer, options } = quizzes[0]; //gets first quizz
+    const { question, answer, options } = currentQuiz; //gets first quizz
     const hasProperties = (question && answer && options) === undefined;
     expect(hasProperties).toBeFalsy();
   });
@@ -65,12 +64,12 @@ describe("[changeQuiz]", () => {
     const secondQuiz = quizzes[1];
 
     changeQuiz();
-    expect(quiz).toEqual(secondQuiz);
+    expect(currentQuiz).toEqual(secondQuiz);
   });
 
   it("[changeQuiz] when called should throw if reached end", () => {
     expect(() => {
-      for (let i=0; i< quizzes.length;i++) {
+      for (let i = 0; i < quizzes.length; i++) {
         changeQuiz();
       }
     }).toThrow();

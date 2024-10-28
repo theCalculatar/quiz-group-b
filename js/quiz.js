@@ -7,7 +7,7 @@ const tempUser = {
   total: 0,
 };
 
-let quiz = quizzes[0]
+let currentQuiz = quizzes[0]
 
 function addUser(name) {
   if (!name.trim()) {
@@ -17,12 +17,12 @@ function addUser(name) {
 }
 
 function changeQuiz() {
-  quiz = quizzes[quizzes.indexOf(quiz)+1]
+  currentQuiz = quizzes[quizzes.indexOf(currentQuiz) + 1];
 
-  if(!quiz){
-    quiz = quizzes[0]
-    addScoreToUser()
-    throw new Error("Reached end of questions!") 
+  if (!currentQuiz) {
+    currentQuiz = quizzes[0];
+    addScoreToUser();
+    throw new Error("Reached end of questions!");
   }
 }
 
@@ -54,4 +54,14 @@ function clearScore(){
 }
 
 
-export { addScore, score, users, tempUser, addScoreToUser, addUser, quiz, changeQuiz, clearScore };
+export {
+  addScore,
+  score,
+  users,
+  tempUser,
+  addScoreToUser,
+  addUser,
+  currentQuiz,
+  changeQuiz,
+  clearScore,
+};
