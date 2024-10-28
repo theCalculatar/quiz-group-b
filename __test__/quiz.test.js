@@ -1,5 +1,4 @@
 import {
-  quizzes,
   quiz,
   addScore,
   score,
@@ -10,6 +9,8 @@ import {
   changeQuiz,
   clearScore,
 } from "../js/quiz";
+
+import quizzes from "../js/questions";
 
 // test predefined array for any anormalities
 describe("[Quiz list]", () => {
@@ -25,9 +26,9 @@ describe("[Quiz list]", () => {
     let sameObj = true;
 
     quizzes.forEach((quiz_) => {
-      const { question, answer, opiton } = quiz_;
+      const { question, answer, opitons } = quiz_;
 
-      sameObj = (!question || answer || opiton) && sameObj;
+      sameObj = (!question || !answer || !opitons) && sameObj;
     });
 
     expect(sameObj).toBe(true);
@@ -69,7 +70,9 @@ describe("[changeQuiz]", () => {
 
   it("[changeQuiz] when called should throw if reached end", () => {
     expect(() => {
-      changeQuiz();
+      for (let i=0; i< quizzes.length;i++) {
+        changeQuiz();
+      }
     }).toThrow();
   });
 });

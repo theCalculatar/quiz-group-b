@@ -1,26 +1,16 @@
+import quizzes from "./questions";
+
 let score = 0;
 const users = [];
 const tempUser = {
   name: "",
   total: 0,
 };
-const quizzes = [
-  {
-    question: "are you single?",
-    answer: "no",
-    options: ["no", "yes"],
-  },
-  {
-    question: "are you pregnant?",
-    answer: "wehh",
-    options: ["wehh", "yohh"],
-  },
-];
 
 let quiz = quizzes[0]
 
 function addUser(name) {
-  if (!name) {
+  if (!name.trim()) {
     throw new Error("Invalid user!");
   }
   tempUser.name = name;
@@ -64,4 +54,4 @@ function clearScore(){
 }
 
 
-export { quizzes, addScore, score, users, tempUser, addScoreToUser, addUser, quiz, changeQuiz, clearScore };
+export { addScore, score, users, tempUser, addScoreToUser, addUser, quiz, changeQuiz, clearScore };
