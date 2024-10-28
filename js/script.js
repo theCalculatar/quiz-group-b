@@ -1,6 +1,4 @@
-import { addUser, changeQuiz, addScore, currentQuiz, users } from "./quiz.js";
-
-const question = currentQuiz;
+import { addUser, changeQuiz, addScore, currentQuiz, users, questionNum } from "./quiz.js";
 
 const rightSection = document.querySelector(".question");
 
@@ -58,7 +56,7 @@ submitBtn.addEventListener("click", () => {
 
 function displayQuestions() {
   rightSection.innerHTML = `
-    <h3>Question 1</h3>
+    <h3>Question ${questionNum}</h3>
     <p>${currentQuiz.question}</p>`;
 
   const optionsElement = document.querySelector(".options");

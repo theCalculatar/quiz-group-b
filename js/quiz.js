@@ -7,6 +7,8 @@ const tempUser = {
   total: 0,
 };
 
+let questionNum = 1
+
 let currentQuiz = quizzes[0]
 
 function addUser(name) {
@@ -30,6 +32,7 @@ function addScore(answer, option) {
   if (!answer || !option) {
     throw new Error("Invalid answer or option!");
   }
+  questionNum++;
   if (answer === option) {
     score++;
   } else {
@@ -51,6 +54,7 @@ function addScoreToUser() {
 function clearScore(){
   score = 0
   tempUser.score = score
+  questionNum = 1
 }
 
 
@@ -64,4 +68,5 @@ export {
   currentQuiz,
   changeQuiz,
   clearScore,
+  questionNum
 };

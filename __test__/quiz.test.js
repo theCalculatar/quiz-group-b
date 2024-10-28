@@ -8,6 +8,7 @@ import {
   addUser,
   changeQuiz,
   clearScore,
+  questionNum,
 } from "../js/quiz";
 
 import quizzes from "../js/questions";
@@ -194,5 +195,24 @@ describe("[addScoreToUser]", () => {
     const initialScore = 0;
     addScoreToUser();
     expect(score).toBe(initialScore);
+  });
+});
+
+describe("[questionNum]", () => {
+  it("[questionNum] should be defined", () => {
+    expect(questionNum).toBeDefined();
+  });
+
+  it("[questionNum] should be a number", () => {
+    const isNumber = typeof questionNum;
+
+    expect(isNumber).toBe("number");
+  });
+
+  it("[questionNum] should clear when ()clearScore is called", () => {
+    const initalValue = 1;
+    clearScore();
+
+    expect(questionNum).toBe(initalValue);
   });
 });
