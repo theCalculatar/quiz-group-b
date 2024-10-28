@@ -1,4 +1,4 @@
-import quizzes from "./questions";
+import quizzes from "./questions.js";
 
 let score = 0;
 const users = [];
